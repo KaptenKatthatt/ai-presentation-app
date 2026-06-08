@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Controls } from './components/Controls';
 import { Overview } from './components/Overview';
-import { PresenterPanel } from './components/PresenterPanel';
+import { PresenterView } from './components/PresenterView';
 import { SlideView } from './components/SlideView';
 import { slides } from './data/slides';
 import { openPresentationWindow, usePresentationSync } from './hooks/usePresentationSync';
@@ -16,8 +16,6 @@ export default function App() {
 
   const progress = useMemo(() => ((current + 1) / slides.length) * 100, [current]);
   const currentSlide = slides[current];
-  const nextSlide = slides[current + 1];
-
   const goTo = (index: number) => setCurrent(clamp(index, 0, slides.length - 1));
   const next = () => goTo(current + 1);
   const previous = () => goTo(current - 1);
@@ -81,17 +79,19 @@ export default function App() {
             setOverviewMode(false);
           }}
         />
+      ) : presenterMode ? (
+        <div className="stage stage--presenter-view">
+          <PresenterView
+            slides={slides}
+            current={current}
+            onGoTo={goTo}
+            onPrevious={previous}
+            onNext={next}
+          />
+        </div>
       ) : (
         <div className="stage">
           <SlideView slide={currentSlide} fitToScreen />
-          {presenterMode && (
-            <PresenterPanel
-              currentSlide={currentSlide}
-              nextSlide={nextSlide}
-              index={current}
-              total={slides.length}
-            />
-          )}
         </div>
       )}
 
