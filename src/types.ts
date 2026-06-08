@@ -15,6 +15,9 @@ export interface Slide {
     title: string;
     text: string;
     image?: string;
+    imagePosition?: string;
+    href?: string;
+    textHref?: string;
   }>;
   steps?: Array<{
     label: string;

@@ -331,11 +331,14 @@ export const slides: Slide[] = [
         title: "HelioTrip",
         text: "Utbildning och äventyr i rymden, i 3D!",
         image: "/images/heliotrip.png",
+        href: "https://project-helio-trip.vercel.app/",
       },
       {
         title: "Doom",
         text: "Första projektet med OpenClaw",
         image: "/images/doom.png",
+        imagePosition: "top center",
+        href: "https://testapp-doom.vercel.app/",
       },
     ],
     speakerNotes:
@@ -343,24 +346,19 @@ export const slides: Slide[] = [
   },
   {
     id: "questions",
-    section: "Demo",
+    section: "End",
     eyebrow: "Projekt showcase",
     title: "Frågor?",
     duration: "Demo + Q&A",
     tone: "demo",
     cards: [
       {
-        title: "Portfolio",
-        text: "www.JonasOlson.se",
-        image: "/images/portfolio.png",
-      },
-      {
-        title: "Doom",
-        text: "Första projektet med OpenClaw",
-        image: "/images/doom.png",
+        title: "www.JonasOlson.se",
+        text: "https://github.com/kaptenKatthatt/",
+        href: "https://www.jonasolson.se/",
+        textHref: "https://github.com/kaptenKatthatt/",
       },
     ],
-    speakerNotes:
-      "Här kan du byta till live-demo. Välj hellre ett fåtal tydliga projekt än att visa allt. För varje projekt: börja med problemet, visa hur du styrde AI:n, visa resultatet och avsluta med vad du lärde dig. Därefter öppnar du för frågor.",
+    speakerNotes: "Slut!",
   },
 ];
