@@ -1,9 +1,0 @@
-- main [ref=e3]:
-  - generic: Åskådarvy
-  - generic:
-    - article "Från TypeScript-elev till systemarkitekt med AI":
-      - generic [ref=e7]:
-        - paragraph [ref=e8]: FED25 • AI, TypeScript & moderna utvecklingsflöden
-        - heading "Från TypeScript-elev till systemarkitekt med AI" [level=1] [ref=e9]
-        - paragraph [ref=e10]: Hur AI kan fungera som lärare, accelerator och arkitektpartner — utan att du tappar kontrollen.
-        - blockquote [ref=e11]: En elev med rätt verktyg kan börja tänka som en arkitekt tidigare än någonsin.

@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight, Maximize2, Minimize2, MonitorUp, PanelRightOpen, Presentation, Users } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Maximize2, Minimize2, MonitorUp, PanelRightOpen, Presentation } from 'lucide-react';
 
 interface ControlsProps {
   current: number;
@@ -11,7 +11,6 @@ interface ControlsProps {
   onToggleOverview: () => void;
   onToggleFullscreen: () => void;
   isFullscreen: boolean;
-  onOpenAudience: () => void;
   onOpenPresentation: () => void;
 }
 
@@ -26,7 +25,6 @@ export function Controls({
   onToggleOverview,
   onToggleFullscreen,
   isFullscreen,
-  onOpenAudience,
   onOpenPresentation,
 }: ControlsProps) {
   return (
@@ -49,11 +47,6 @@ export function Controls({
       <button onClick={onOpenPresentation} aria-label="Öppna presentationsvy utan manus">
         <Presentation size={18} />
         Presentationsvy
-      </button>
-
-      <button onClick={onOpenAudience} aria-label="Öppna åskådarvy utan manus">
-        <Users size={18} />
-        Åskådarvy
       </button>
 
       <span className="controls__counter">{current + 1} / {total}</span>

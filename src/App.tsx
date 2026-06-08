@@ -1,23 +1,27 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Controls } from './components/Controls';
 import { Overview } from './components/Overview';
-import { PresenterPanel } from './components/PresenterPanel';
+import { PresenterView } from './components/PresenterView';
 import { SlideView } from './components/SlideView';
-import { slides } from './data/slides';
+import { slides as initialSlides } from './data/slides';
 import { openPresentationWindow, usePresentationSync } from './hooks/usePresentationSync';
 
 const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
 
 export default function App() {
+  const [slides, setSlides] = useState(initialSlides);
   const [current, setCurrent] = useState(0);
   const [presenterMode, setPresenterMode] = useState(false);
   const [overviewMode, setOverviewMode] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
-  const progress = useMemo(() => ((current + 1) / slides.length) * 100, [current]);
+  const progress = useMemo(() => ((current + 1) / slides.length) * 100, [current, slides.length]);
   const currentSlide = slides[current];
-  const nextSlide = slides[current + 1];
-
+  const updateSpeakerNotes = (index: number, notes: string) => {
+    setSlides((prev) =>
+      prev.map((slide, i) => (i === index ? { ...slide, speakerNotes: notes } : slide)),
+    );
+  };
   const goTo = (index: number) => setCurrent(clamp(index, 0, slides.length - 1));
   const next = () => goTo(current + 1);
   const previous = () => goTo(current - 1);
@@ -36,13 +40,21 @@ export default function App() {
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
+      const target = event.target;
+      const isEditing =
+        target instanceof HTMLTextAreaElement ||
+        target instanceof HTMLInputElement ||
+        (target instanceof HTMLElement && target.isContentEditable);
+
       const key = event.key.toLowerCase();
-      if (key === 'arrowright' || key === ' ') next();
-      if (key === 'arrowleft') previous();
+      if (!isEditing) {
+        if (key === 'arrowright' || key === ' ') next();
+        if (key === 'arrowleft') previous();
+      }
       if (key === 'm') setPresenterMode((value) => !value);
       if (key === 'o') setOverviewMode((value) => !value);
       if (key === 'f') void toggleFullscreen();
-      if (key === 'p') openPresentationWindow('audience');
+      if (key === 'p') openPresentationWindow();
     };
 
     window.addEventListener('keydown', onKeyDown);
@@ -65,7 +77,7 @@ export default function App() {
           <span className="brand-mark">TS</span>
           <strong>Systemarkitekt med AI</strong>
         </div>
-        <span className="topbar__hint">← → • M manus • O översikt • F fullskärm • P åskådare</span>
+        <span className="topbar__hint">← → • M manus • O översikt • F fullskärm • P presentationsvy</span>
       </header>
 
       <div className="progress" aria-hidden="true">
@@ -81,17 +93,20 @@ export default function App() {
             setOverviewMode(false);
           }}
         />
+      ) : presenterMode ? (
+        <div className="stage stage--presenter-view">
+          <PresenterView
+            slides={slides}
+            current={current}
+            onGoTo={goTo}
+            onPrevious={previous}
+            onNext={next}
+            onSpeakerNotesChange={updateSpeakerNotes}
+          />
+        </div>
       ) : (
         <div className="stage">
           <SlideView slide={currentSlide} fitToScreen />
-          {presenterMode && (
-            <PresenterPanel
-              currentSlide={currentSlide}
-              nextSlide={nextSlide}
-              index={current}
-              total={slides.length}
-            />
-          )}
         </div>
       )}
 
@@ -106,8 +121,7 @@ export default function App() {
         onToggleOverview={() => setOverviewMode((value) => !value)}
         onToggleFullscreen={toggleFullscreen}
         isFullscreen={isFullscreen}
-        onOpenAudience={() => openPresentationWindow('audience')}
-        onOpenPresentation={() => openPresentationWindow('presentation')}
+        onOpenPresentation={() => openPresentationWindow()}
       />
     </main>
   );

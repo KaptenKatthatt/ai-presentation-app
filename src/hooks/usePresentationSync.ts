@@ -70,12 +70,12 @@ export function usePresentationSync({ role, current, onRemoteSlide }: UsePresent
   return { broadcastSlide };
 }
 
-export function getViewUrl(view: 'audience' | 'presentation') {
+export function getPresentationViewUrl() {
   const url = new URL(window.location.href);
-  url.searchParams.set('view', view);
+  url.searchParams.set('view', 'presentation');
   return url.toString();
 }
 
-export function openPresentationWindow(view: 'audience' | 'presentation') {
-  return window.open(getViewUrl(view), `presentation-${view}`, 'noopener,noreferrer,width=1280,height=720');
+export function openPresentationWindow() {
+  return window.open(getPresentationViewUrl(), 'presentation-view', 'noopener,noreferrer,width=1280,height=720');
 }
