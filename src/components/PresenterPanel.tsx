@@ -71,15 +71,15 @@ export function PresenterPanel({ currentSlide, index, total }: PresenterPanelPro
               <span>M visa/dölj manusvy</span>
               <span>O översikt</span>
               <span>F fullskärm</span>
-              <span>P öppna åskådarvy</span>
+              <span>P öppna presentationsvy</span>
             </div>
           </div>
 
           <div className="presenter__tools-section">
-            <p className="eyebrow">Publikvyer</p>
+            <p className="eyebrow">Presentationsvy</p>
             <p className="presenter__tools-copy">
-              Öppna presentations- eller åskådarvy från kontrollraden längst ner. De synkar automatiskt med
-              den bild du visar här.
+              Öppna presentationsvyn från kontrollraden längst ner. Den synkar automatiskt med den bild du
+              visar här.
             </p>
           </div>
         </div>

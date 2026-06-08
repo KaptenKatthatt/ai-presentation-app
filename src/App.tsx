@@ -40,7 +40,7 @@ export default function App() {
       if (key === 'm') setPresenterMode((value) => !value);
       if (key === 'o') setOverviewMode((value) => !value);
       if (key === 'f') void toggleFullscreen();
-      if (key === 'p') openPresentationWindow('audience');
+      if (key === 'p') openPresentationWindow();
     };
 
     window.addEventListener('keydown', onKeyDown);
@@ -63,7 +63,7 @@ export default function App() {
           <span className="brand-mark">TS</span>
           <strong>Systemarkitekt med AI</strong>
         </div>
-        <span className="topbar__hint">← → • M manus • O översikt • F fullskärm • P åskådare</span>
+        <span className="topbar__hint">← → • M manus • O översikt • F fullskärm • P presentationsvy</span>
       </header>
 
       <div className="progress" aria-hidden="true">
@@ -106,8 +106,7 @@ export default function App() {
         onToggleOverview={() => setOverviewMode((value) => !value)}
         onToggleFullscreen={toggleFullscreen}
         isFullscreen={isFullscreen}
-        onOpenAudience={() => openPresentationWindow('audience')}
-        onOpenPresentation={() => openPresentationWindow('presentation')}
+        onOpenPresentation={() => openPresentationWindow()}
       />
     </main>
   );

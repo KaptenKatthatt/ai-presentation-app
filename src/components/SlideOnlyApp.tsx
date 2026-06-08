@@ -5,14 +5,9 @@ import { SlideView } from './SlideView';
 
 const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
 
-interface SlideOnlyAppProps {
-  mode: 'audience' | 'presentation';
-}
-
-export function SlideOnlyApp({ mode }: SlideOnlyAppProps) {
+export function SlideOnlyApp() {
   const [current, setCurrent] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const isAudience = mode === 'audience';
 
   const progress = useMemo(() => ((current + 1) / slides.length) * 100, [current]);
   const currentSlide = slides[current];
@@ -39,8 +34,6 @@ export function SlideOnlyApp({ mode }: SlideOnlyAppProps) {
   }, []);
 
   useEffect(() => {
-    if (isAudience) return;
-
     const onKeyDown = (event: KeyboardEvent) => {
       const key = event.key.toLowerCase();
       if (key === 'arrowright' || key === ' ') next();
@@ -53,18 +46,12 @@ export function SlideOnlyApp({ mode }: SlideOnlyAppProps) {
 
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [current, isAudience]);
+  }, [current]);
 
   return (
-    <main className={`app app--slide-only app--${mode}${isFullscreen ? ' app--fullscreen' : ''}`}>
+    <main className={`app app--slide-only app--presentation${isFullscreen ? ' app--fullscreen' : ''}`}>
       <div className="aurora aurora--one" />
       <div className="aurora aurora--two" />
-
-      {isAudience && (
-        <div className="audience-badge" aria-hidden="true">
-          Åskådarvy
-        </div>
-      )}
 
       <div className="progress" aria-hidden="true">
         <div style={{ width: `${progress}%` }} />
