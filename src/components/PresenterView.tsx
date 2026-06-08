@@ -10,6 +10,7 @@ interface PresenterViewProps {
   onGoTo: (index: number) => void;
   onPrevious: () => void;
   onNext: () => void;
+  onSpeakerNotesChange: (index: number, notes: string) => void;
 }
 
 export function PresenterView({
@@ -18,6 +19,7 @@ export function PresenterView({
   onGoTo,
   onPrevious,
   onNext,
+  onSpeakerNotesChange,
 }: PresenterViewProps) {
   const currentSlide = slides[current];
   const previousSlide = slides[current - 1];
@@ -91,6 +93,7 @@ export function PresenterView({
         currentSlide={currentSlide}
         index={current}
         total={slides.length}
+        onSpeakerNotesChange={(notes) => onSpeakerNotesChange(current, notes)}
       />
     </div>
   );

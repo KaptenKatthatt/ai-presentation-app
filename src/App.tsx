@@ -3,19 +3,25 @@ import { Controls } from './components/Controls';
 import { Overview } from './components/Overview';
 import { PresenterView } from './components/PresenterView';
 import { SlideView } from './components/SlideView';
-import { slides } from './data/slides';
+import { slides as initialSlides } from './data/slides';
 import { openPresentationWindow, usePresentationSync } from './hooks/usePresentationSync';
 
 const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
 
 export default function App() {
+  const [slides, setSlides] = useState(initialSlides);
   const [current, setCurrent] = useState(0);
   const [presenterMode, setPresenterMode] = useState(false);
   const [overviewMode, setOverviewMode] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
-  const progress = useMemo(() => ((current + 1) / slides.length) * 100, [current]);
+  const progress = useMemo(() => ((current + 1) / slides.length) * 100, [current, slides.length]);
   const currentSlide = slides[current];
+  const updateSpeakerNotes = (index: number, notes: string) => {
+    setSlides((prev) =>
+      prev.map((slide, i) => (i === index ? { ...slide, speakerNotes: notes } : slide)),
+    );
+  };
   const goTo = (index: number) => setCurrent(clamp(index, 0, slides.length - 1));
   const next = () => goTo(current + 1);
   const previous = () => goTo(current - 1);
@@ -34,9 +40,17 @@ export default function App() {
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
+      const target = event.target;
+      const isEditing =
+        target instanceof HTMLTextAreaElement ||
+        target instanceof HTMLInputElement ||
+        (target instanceof HTMLElement && target.isContentEditable);
+
       const key = event.key.toLowerCase();
-      if (key === 'arrowright' || key === ' ') next();
-      if (key === 'arrowleft') previous();
+      if (!isEditing) {
+        if (key === 'arrowright' || key === ' ') next();
+        if (key === 'arrowleft') previous();
+      }
       if (key === 'm') setPresenterMode((value) => !value);
       if (key === 'o') setOverviewMode((value) => !value);
       if (key === 'f') void toggleFullscreen();
@@ -87,6 +101,7 @@ export default function App() {
             onGoTo={goTo}
             onPrevious={previous}
             onNext={next}
+            onSpeakerNotesChange={updateSpeakerNotes}
           />
         </div>
       ) : (

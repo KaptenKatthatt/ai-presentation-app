@@ -8,13 +8,14 @@ interface PresenterPanelProps {
   currentSlide: Slide;
   index: number;
   total: number;
+  onSpeakerNotesChange: (notes: string) => void;
 }
 
 const MIN_NOTES_SCALE = 0.85;
 const MAX_NOTES_SCALE = 1.45;
 const NOTES_SCALE_STEP = 0.1;
 
-export function PresenterPanel({ currentSlide, index, total }: PresenterPanelProps) {
+export function PresenterPanel({ currentSlide, index, total, onSpeakerNotesChange }: PresenterPanelProps) {
   const [activeTab, setActiveTab] = useState<PresenterTab>('notes');
   const [notesScale, setNotesScale] = useState(1);
 
@@ -58,9 +59,14 @@ export function PresenterPanel({ currentSlide, index, total }: PresenterPanelPro
             </div>
           </div>
 
-          <div className="presenter__notes" style={{ fontSize: `${notesScale}rem` }}>
-            <p>{currentSlide.speakerNotes}</p>
-          </div>
+          <textarea
+            className="presenter__notes"
+            style={{ fontSize: `${notesScale}rem` }}
+            value={currentSlide.speakerNotes}
+            onChange={(event) => onSpeakerNotesChange(event.target.value)}
+            aria-label="Stödanteckningar för aktuell bild"
+            spellCheck
+          />
         </div>
       ) : (
         <div className="presenter__panel presenter__panel--tools" role="tabpanel">

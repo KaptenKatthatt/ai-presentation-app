@@ -643,14 +643,27 @@ a.card:hover {
 
 .presenter__notes {
   flex: 1;
+  width: 100%;
   min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: #fff;
   overflow: auto;
+  resize: none;
   line-height: 1.65;
+  font: inherit;
+  outline: none;
 }
 
-.presenter__notes p {
-  margin: 0;
-  color: #fff;
+.presenter__notes:focus {
+  outline: none;
+}
+
+.presenter__notes::placeholder {
+  color: var(--text-soft);
 }
 
 .presenter__panel--tools {
