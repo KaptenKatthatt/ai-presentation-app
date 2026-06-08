@@ -1,1 +1,0 @@
-{"root":["./src/app.tsx","./src/main.tsx","./src/types.ts","./src/components/controls.tsx","./src/components/overview.tsx","./src/components/presenterpanel.tsx","./src/components/slideonlyapp.tsx","./src/components/slideview.tsx","./src/data/slides.ts","./src/hooks/usepresentationsync.ts"],"errors":true,"version":"6.0.3"}
