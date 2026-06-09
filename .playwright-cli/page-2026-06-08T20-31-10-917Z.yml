@@ -1,0 +1,35 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]: TS
+      - strong [ref=e7]: Systemarkitekt med AI
+    - generic [ref=e8]: ← → • M manus • O översikt • F fullskärm • P åskådare
+  - article "Från TypeScript-elev till systemarkitekt med AI" [ref=e10]:
+    - generic [ref=e13]:
+      - paragraph [ref=e14]: FED25 • AI, TypeScript & moderna utvecklingsflöden
+      - heading "Från TypeScript-elev till systemarkitekt med AI" [level=1] [ref=e15]
+      - paragraph [ref=e16]: Hur AI kan fungera som lärare, accelerator och arkitektpartner — utan att du tappar kontrollen.
+      - blockquote [ref=e17]: En elev med rätt verktyg kan börja tänka som en arkitekt tidigare än någonsin.
+  - navigation "Presentationskontroller" [ref=e18]:
+    - button "Föregående slide" [disabled] [ref=e19]:
+      - img [ref=e20]
+      - text: Föregående
+    - button "Visa slideöversikt" [ref=e22] [cursor=pointer]:
+      - img [ref=e23]
+      - text: Översikt
+    - button "Visa manusläge" [ref=e26] [cursor=pointer]:
+      - img [ref=e27]
+      - text: Manus
+    - button "Öppna presentationsvy utan manus" [ref=e30] [cursor=pointer]:
+      - img [ref=e31]
+      - text: Presentationsvy
+    - button "Öppna åskådarvy utan manus" [ref=e34] [cursor=pointer]:
+      - img [ref=e35]
+      - text: Åskådarvy
+    - generic [ref=e40]: 1 / 17
+    - button "Växla fullskärm" [ref=e41] [cursor=pointer]:
+      - img [ref=e42]
+      - text: Fullskärm
+    - button "Nästa slide" [ref=e47] [cursor=pointer]:
+      - text: Nästa
+      - img [ref=e48]

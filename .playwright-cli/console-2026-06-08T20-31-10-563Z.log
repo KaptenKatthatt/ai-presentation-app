@@ -1,0 +1,69 @@
+[     175ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5175/node_modules/.vite/deps/react-dom_client.js?v=df110c90:14336
+[     348ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:5175/favicon.ico:0
+[  630045ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:5175/src/data/slides.ts?t=1780951300589:0
+[  630045ms] [ERROR] [vite] Failed to reload /src/App.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:5175/@vite/client:524
+[  630046ms] [ERROR] [vite] Failed to reload /src/components/SlideOnlyApp.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:5175/@vite/client:524
+[  645886ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:5175/src/data/slides.ts?t=1780951316433:0
+[  645886ms] [ERROR] [vite] Failed to reload /src/components/SlideOnlyApp.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:5175/@vite/client:524
+[  645886ms] [ERROR] [vite] Failed to reload /src/App.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:5175/@vite/client:524
+[ 1116452ms] [ERROR] You are calling ReactDOMClient.createRoot() on a container that has already been passed to createRoot() before. Instead, call root.render() on the existing root instead if you want to update it. @ http://localhost:5175/@vite/client:524
+[ 1116548ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5175/node_modules/.vite/deps/react-dom_client.js?v=df110c90:14336
+[ 1117763ms] ReferenceError: Users is not defined
+    at Controls (http://localhost:5175/src/components/Controls.tsx?t=1780951788281:67:40)
+    at Object.react_stack_bottom_frame (http://localhost:5175/node_modules/.vite/deps/react-dom_client.js?v=df110c90:12867:12)
+    at renderWithHooks (http://localhost:5175/node_modules/.vite/deps/react-dom_client.js?v=df110c90:4212:19)
+    at updateFunctionComponent (http://localhost:5175/node_modules/.vite/deps/react-dom_client.js?v=df110c90:5568:16)
+    at beginWork (http://localhost:5175/node_modules/.vite/deps/react-dom_client.js?v=df110c90:6139:20)
+    at runWithFiberInDEV (http://localhost:5175/node_modules/.vite/deps/react-dom_client.js?v=df110c90:850:66)
+    at performUnitOfWork (http://localhost:5175/node_modules/.vite/deps/react-dom_client.js?v=df110c90:8428:92)
+    at workLoopSync (http://localhost:5175/node_modules/.vite/deps/react-dom_client.js?v=df110c90:8324:37)
+    at renderRootSync (http://localhost:5175/node_modules/.vite/deps/react-dom_client.js?v=df110c90:8308:6)
+    at performWorkOnRoot (http://localhost:5175/node_modules/.vite/deps/react-dom_client.js?v=df110c90:7993:27)
+[ 1117763ms] [WARNING] %s
+
+%s
+ An error occurred in the <Controls> component. Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries. @ http://localhost:5175/@vite/client:524
+[ 1118273ms] ReferenceError: Users is not defined
+    at Controls (http://localhost:5175/src/components/Controls.tsx?t=1780951788792:67:40)
+    at Object.react_stack_bottom_frame (http://localhost:5175/node_modules/.vite/deps/react-dom_client.js?v=df110c90:12867:12)
+    at renderWithHooks (http://localhost:5175/node_modules/.vite/deps/react-dom_client.js?v=df110c90:4212:19)
+    at updateFunctionComponent (http://localhost:5175/node_modules/.vite/deps/react-dom_client.js?v=df110c90:5568:16)
+    at beginWork (http://localhost:5175/node_modules/.vite/deps/react-dom_client.js?v=df110c90:6139:20)
+    at runWithFiberInDEV (http://localhost:5175/node_modules/.vite/deps/react-dom_client.js?v=df110c90:850:66)
+    at performUnitOfWork (http://localhost:5175/node_modules/.vite/deps/react-dom_client.js?v=df110c90:8428:92)
+    at workLoopSync (http://localhost:5175/node_modules/.vite/deps/react-dom_client.js?v=df110c90:8324:37)
+    at renderRootSync (http://localhost:5175/node_modules/.vite/deps/react-dom_client.js?v=df110c90:8308:6)
+    at performWorkOnRoot (http://localhost:5175/node_modules/.vite/deps/react-dom_client.js?v=df110c90:7993:27)
+[ 1118273ms] [WARNING] %s
+
+%s
+ An error occurred in the <Controls> component. Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries. @ http://localhost:5175/@vite/client:524
+[ 1118691ms] ReferenceError: onOpenAudience is not defined
+    at Controls (http://localhost:5175/src/components/Controls.tsx?t=1780951789222:65:14)
+    at Object.react_stack_bottom_frame (http://localhost:5175/node_modules/.vite/deps/react-dom_client.js?v=df110c90:12867:12)
+    at renderWithHooks (http://localhost:5175/node_modules/.vite/deps/react-dom_client.js?v=df110c90:4212:19)
+    at updateFunctionComponent (http://localhost:5175/node_modules/.vite/deps/react-dom_client.js?v=df110c90:5568:16)
+    at beginWork (http://localhost:5175/node_modules/.vite/deps/react-dom_client.js?v=df110c90:6139:20)
+    at runWithFiberInDEV (http://localhost:5175/node_modules/.vite/deps/react-dom_client.js?v=df110c90:850:66)
+    at performUnitOfWork (http://localhost:5175/node_modules/.vite/deps/react-dom_client.js?v=df110c90:8428:92)
+    at workLoopSync (http://localhost:5175/node_modules/.vite/deps/react-dom_client.js?v=df110c90:8324:37)
+    at renderRootSync (http://localhost:5175/node_modules/.vite/deps/react-dom_client.js?v=df110c90:8308:6)
+    at performWorkOnRoot (http://localhost:5175/node_modules/.vite/deps/react-dom_client.js?v=df110c90:7993:27)
+[ 1118691ms] [WARNING] %s
+
+%s
+ An error occurred in the <Controls> component. Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries. @ http://localhost:5175/@vite/client:524
+[ 1408154ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:5175/src/components/PresenterView.tsx?t=1780952078711:0
+[ 1408155ms] [ERROR] [vite] Failed to reload /src/components/PresenterView.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:5175/@vite/client:524
+[ 1408164ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:5175/src/components/SlideThumbnail.tsx?t=1780952078713:0
+[ 1408165ms] [ERROR] [vite] Failed to reload /src/components/SlideThumbnail.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:5175/@vite/client:524
+[ 1408227ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:5175/src/components/PresenterView.tsx?t=1780952078711:0
+[ 1432370ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5175/node_modules/.vite/deps/react-dom_client.js?v=df110c90:14336
+[ 1531674ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:5175/src/components/PresenterView.tsx?t=1780952202228:0
+[ 1531675ms] [ERROR] [vite] Failed to reload /src/components/PresenterView.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:5175/@vite/client:524
+[ 1531682ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:5175/src/components/SlideThumbnail.tsx?t=1780952202230:0
+[ 1531682ms] [ERROR] [vite] Failed to reload /src/components/SlideThumbnail.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:5175/@vite/client:524
+[ 1531734ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:5175/src/components/PresenterView.tsx?t=1780952202228:0
