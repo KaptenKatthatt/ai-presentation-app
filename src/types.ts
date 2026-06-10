@@ -1,5 +1,17 @@
 export type SlideTone = 'intro' | 'teacher' | 'accelerator' | 'guardrails' | 'wildwest' | 'market' | 'summary' | 'demo';
 
+export type SlideTransition =
+  | 'none'
+  | 'dissolve'
+  | 'push'
+  | 'slide'
+  | 'zoom'
+  | 'fade-through-black'
+  | 'flip'
+  | 'cube'
+  | 'doorway'
+  | 'mosaic';
+
 export interface Slide {
   id: string;
   section: string;
@@ -25,4 +37,6 @@ export interface Slide {
     text: string;
   }>;
   speakerNotes: string;
+  /** Animation when entering this slide from the previous one. */
+  transition?: SlideTransition;
 }

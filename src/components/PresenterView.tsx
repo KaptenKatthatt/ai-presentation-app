@@ -1,8 +1,10 @@
 import { ChevronLeft, ChevronRight, Pause, Play, RotateCcw } from 'lucide-react';
 import type { Slide } from '../types';
-import { usePresentationTimer } from '../hooks/usePresentationTimer';
+import type { usePresentationTimer } from '../hooks/usePresentationTimer';
 import { PresenterPanel } from './PresenterPanel';
 import { SlideThumbnail } from './SlideThumbnail';
+
+type PresentationTimer = ReturnType<typeof usePresentationTimer>;
 
 interface PresenterViewProps {
   slides: Slide[];
@@ -11,6 +13,7 @@ interface PresenterViewProps {
   onPrevious: () => void;
   onNext: () => void;
   onSpeakerNotesChange: (index: number, notes: string) => void;
+  timer: PresentationTimer;
 }
 
 export function PresenterView({
@@ -20,11 +23,12 @@ export function PresenterView({
   onPrevious,
   onNext,
   onSpeakerNotesChange,
+  timer,
 }: PresenterViewProps) {
   const currentSlide = slides[current];
   const previousSlide = slides[current - 1];
   const nextSlide = slides[current + 1];
-  const { elapsed, isPaused, togglePause, reset } = usePresentationTimer(true);
+  const { elapsed, isPaused, togglePause, reset } = timer;
 
   return (
     <div className="presenter-view">
