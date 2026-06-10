@@ -1,4 +1,4 @@
-import { ChevronDown, ChevronUp, Pause, Play, RotateCcw } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Pause, Play, RotateCcw } from 'lucide-react';
 import type { Slide } from '../types';
 import { usePresentationTimer } from '../hooks/usePresentationTimer';
 import { PresenterPanel } from './PresenterPanel';
@@ -49,10 +49,10 @@ export function PresenterView({
           <span className="presenter-view__selector-label">Bild {current + 1}</span>
           <div className="presenter-view__selector-nav">
             <button type="button" onClick={onPrevious} disabled={current === 0} aria-label="Föregående bild">
-              <ChevronUp size={18} />
+              <ChevronLeft size={18} />
             </button>
             <button type="button" onClick={onNext} disabled={current === slides.length - 1} aria-label="Nästa bild">
-              <ChevronDown size={18} />
+              <ChevronRight size={18} />
             </button>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Controls } from './components/Controls';
 import { Overview } from './components/Overview';
 import { PresenterView } from './components/PresenterView';
@@ -22,13 +22,22 @@ export default function App() {
       prev.map((slide, i) => (i === index ? { ...slide, speakerNotes: notes } : slide)),
     );
   };
-  const goTo = (index: number) => setCurrent(clamp(index, 0, slides.length - 1));
-  const next = () => goTo(current + 1);
-  const previous = () => goTo(current - 1);
+  const goTo = useCallback(
+    (index: number) => setCurrent(clamp(index, 0, slides.length - 1)),
+    [slides.length],
+  );
+  const next = useCallback(
+    () => setCurrent((value) => clamp(value + 1, 0, slides.length - 1)),
+    [slides.length],
+  );
+  const previous = useCallback(
+    () => setCurrent((value) => clamp(value - 1, 0, slides.length - 1)),
+    [slides.length],
+  );
 
   usePresentationSync({ role: 'presenter', current });
 
-  const toggleFullscreen = async () => {
+  const toggleFullscreen = useCallback(async () => {
     if (!document.fullscreenElement) {
       await document.documentElement.requestFullscreen();
       setIsFullscreen(true);
@@ -36,7 +45,7 @@ export default function App() {
       await document.exitFullscreen();
       setIsFullscreen(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -59,7 +68,7 @@ export default function App() {
 
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [current]);
+  }, [next, previous, toggleFullscreen]);
 
   useEffect(() => {
     const onFullscreenChange = () => setIsFullscreen(Boolean(document.fullscreenElement));

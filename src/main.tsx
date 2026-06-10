@@ -6,7 +6,7 @@ import './styles.css';
 
 const view = new URLSearchParams(window.location.search).get('view');
 
-function Root() {
+export function Root() {
   if (view === 'presentation') {
     return <SlideOnlyApp />;
   }

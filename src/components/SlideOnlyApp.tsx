@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { slides } from '../data/slides';
 import { usePresentationSync } from '../hooks/usePresentationSync';
 import { SlideView } from './SlideView';
@@ -12,9 +12,18 @@ export function SlideOnlyApp() {
   const progress = useMemo(() => ((current + 1) / slides.length) * 100, [current]);
   const currentSlide = slides[current];
 
-  const goTo = (index: number) => setCurrent(clamp(index, 0, slides.length - 1));
-  const next = () => goTo(current + 1);
-  const previous = () => goTo(current - 1);
+  const goTo = useCallback(
+    (index: number) => setCurrent(clamp(index, 0, slides.length - 1)),
+    [],
+  );
+  const next = useCallback(
+    () => setCurrent((value) => clamp(value + 1, 0, slides.length - 1)),
+    [],
+  );
+  const previous = useCallback(
+    () => setCurrent((value) => clamp(value - 1, 0, slides.length - 1)),
+    [],
+  );
 
   usePresentationSync({
     role: 'audience',
@@ -46,7 +55,7 @@ export function SlideOnlyApp() {
 
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [current]);
+  }, [next, previous]);
 
   return (
     <main className={`app app--slide-only app--presentation${isFullscreen ? ' app--fullscreen' : ''}`}>
