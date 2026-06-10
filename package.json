@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
-    "type-coverage": "type-coverage --detail",
+    "type-coverage": "type-coverage --detail --at-least 100",
     "check": "npm run typecheck && npm run lint && npm run type-coverage"
   },
   "dependencies": {
