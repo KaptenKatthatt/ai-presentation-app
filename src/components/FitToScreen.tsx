@@ -7,9 +7,11 @@ interface FitToScreenProps {
   children: ReactNode;
   className?: string;
   contentKey: string;
+  /** Only fit once on mount + resize — avoids scale jumps during transitions. */
+  stableLayout?: boolean;
 }
 
-export function FitToScreen({ children, className, contentKey }: FitToScreenProps) {
+export function FitToScreen({ children, className, contentKey, stableLayout = false }: FitToScreenProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
 
@@ -55,7 +57,10 @@ export function FitToScreen({ children, className, contentKey }: FitToScreenProp
     };
 
     scheduleFit();
-    const delays = [0, 50, 150, 400, 800].map((ms) => window.setTimeout(scheduleFit, ms));
+    const timeoutIds = stableLayout
+      ? []
+      : [0, 50, 150, 400, 800].map((ms) => window.setTimeout(scheduleFit, ms));
+    const rafId = stableLayout ? requestAnimationFrame(scheduleFit) : 0;
 
     const observer = new ResizeObserver(scheduleFit);
     observer.observe(container);
@@ -78,13 +83,14 @@ export function FitToScreen({ children, className, contentKey }: FitToScreenProp
     void document.fonts.ready.then(scheduleFit);
 
     return () => {
-      delays.forEach((id) => window.clearTimeout(id));
+      timeoutIds.forEach((id) => window.clearTimeout(id));
+      if (rafId) cancelAnimationFrame(rafId);
       imageCleanups.forEach((cleanup) => cleanup());
       observer.disconnect();
       window.removeEventListener('resize', scheduleFit);
       document.removeEventListener('fullscreenchange', scheduleFit);
     };
-  }, [contentKey]);
+  }, [contentKey, stableLayout]);
 
   return (
     <div ref={containerRef} className={className}>

@@ -4,9 +4,11 @@ import { FitToScreen } from './FitToScreen';
 interface SlideViewProps {
   slide: Slide;
   fitToScreen?: boolean;
+  /** Skip delayed refits — used during cross-slide transitions. */
+  stableLayout?: boolean;
 }
 
-export function SlideView({ slide, fitToScreen = false }: SlideViewProps) {
+export function SlideView({ slide, fitToScreen = false, stableLayout = false }: SlideViewProps) {
   const content = (
     <div className="slide__content">
       <p className="eyebrow">{slide.eyebrow}</p>
@@ -112,7 +114,7 @@ export function SlideView({ slide, fitToScreen = false }: SlideViewProps) {
   return (
     <article className={`slide slide--${slide.tone}`} aria-labelledby={`slide-${slide.id}`}>
       {fitToScreen ? (
-        <FitToScreen className="slide__content-fit" contentKey={slide.id}>
+        <FitToScreen className="slide__content-fit" contentKey={slide.id} stableLayout={stableLayout}>
           {content}
         </FitToScreen>
       ) : (
