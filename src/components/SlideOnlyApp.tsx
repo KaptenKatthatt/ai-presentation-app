@@ -1,25 +1,41 @@
-import { useEffect, useMemo, useState } from 'react';
-import { slides } from '../data/slides';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { slides as initialSlides } from '../data/slides';
+import { loadSlides, SLIDES_STORAGE_KEY } from '../hooks/usePersistedSlides';
 import { usePresentationSync } from '../hooks/usePresentationSync';
-import { SlideView } from './SlideView';
+import { AnimatedSlideStage } from './AnimatedSlideStage';
 
 const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
 
-interface SlideOnlyAppProps {
-  mode: 'audience' | 'presentation';
-}
-
-export function SlideOnlyApp({ mode }: SlideOnlyAppProps) {
+export function SlideOnlyApp() {
+  const [slides, setSlides] = useState(() => loadSlides(initialSlides));
   const [current, setCurrent] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const isAudience = mode === 'audience';
 
-  const progress = useMemo(() => ((current + 1) / slides.length) * 100, [current]);
-  const currentSlide = slides[current];
+  useEffect(() => {
+    const reloadSlides = () => setSlides(loadSlides(initialSlides));
 
-  const goTo = (index: number) => setCurrent(clamp(index, 0, slides.length - 1));
-  const next = () => goTo(current + 1);
-  const previous = () => goTo(current - 1);
+    const onStorage = (event: StorageEvent) => {
+      if (event.key === SLIDES_STORAGE_KEY) reloadSlides();
+    };
+
+    window.addEventListener('storage', onStorage);
+    return () => window.removeEventListener('storage', onStorage);
+  }, []);
+
+  const progress = useMemo(() => ((current + 1) / slides.length) * 100, [current, slides.length]);
+
+  const goTo = useCallback(
+    (index: number) => setCurrent((value) => clamp(index, 0, slides.length - 1)),
+    [slides.length],
+  );
+  const next = useCallback(
+    () => setCurrent((value) => clamp(value + 1, 0, slides.length - 1)),
+    [slides.length],
+  );
+  const previous = useCallback(
+    () => setCurrent((value) => clamp(value - 1, 0, slides.length - 1)),
+    [slides.length],
+  );
 
   usePresentationSync({
     role: 'audience',
@@ -39,8 +55,6 @@ export function SlideOnlyApp({ mode }: SlideOnlyAppProps) {
   }, []);
 
   useEffect(() => {
-    if (isAudience) return;
-
     const onKeyDown = (event: KeyboardEvent) => {
       const key = event.key.toLowerCase();
       if (key === 'arrowright' || key === ' ') next();
@@ -53,25 +67,23 @@ export function SlideOnlyApp({ mode }: SlideOnlyAppProps) {
 
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [current, isAudience]);
+  }, [next, previous]);
+
+  useEffect(() => {
+    setCurrent((value) => clamp(value, 0, slides.length - 1));
+  }, [slides.length]);
 
   return (
-    <main className={`app app--slide-only app--${mode}${isFullscreen ? ' app--fullscreen' : ''}`}>
+    <main className={`app app--slide-only app--presentation${isFullscreen ? ' app--fullscreen' : ''}`}>
       <div className="aurora aurora--one" />
       <div className="aurora aurora--two" />
-
-      {isAudience && (
-        <div className="audience-badge" aria-hidden="true">
-          Åskådarvy
-        </div>
-      )}
 
       <div className="progress" aria-hidden="true">
         <div style={{ width: `${progress}%` }} />
       </div>
 
       <div className="stage stage--solo">
-        <SlideView slide={currentSlide} fitToScreen />
+        <AnimatedSlideStage slides={slides} current={current} fitToScreen />
       </div>
     </main>
   );

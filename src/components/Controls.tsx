@@ -1,17 +1,18 @@
-import { ChevronLeft, ChevronRight, Maximize2, Minimize2, MonitorUp, PanelRightOpen, Presentation, Users } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Maximize2, Minimize2, MonitorUp, PanelRightOpen, Pencil, Presentation } from 'lucide-react';
 
 interface ControlsProps {
   current: number;
   total: number;
   presenterMode: boolean;
   overviewMode: boolean;
+  editMode: boolean;
   onPrevious: () => void;
   onNext: () => void;
   onTogglePresenter: () => void;
   onToggleOverview: () => void;
+  onToggleEdit: () => void;
   onToggleFullscreen: () => void;
   isFullscreen: boolean;
-  onOpenAudience: () => void;
   onOpenPresentation: () => void;
 }
 
@@ -20,13 +21,14 @@ export function Controls({
   total,
   presenterMode,
   overviewMode,
+  editMode,
   onPrevious,
   onNext,
   onTogglePresenter,
   onToggleOverview,
+  onToggleEdit,
   onToggleFullscreen,
   isFullscreen,
-  onOpenAudience,
   onOpenPresentation,
 }: ControlsProps) {
   return (
@@ -36,12 +38,17 @@ export function Controls({
         Föregående
       </button>
 
-      <button onClick={onToggleOverview} aria-pressed={overviewMode} aria-label="Visa slideöversikt">
+      <button onClick={onToggleOverview} aria-pressed={overviewMode} disabled={editMode} aria-label="Visa slideöversikt">
         <MonitorUp size={18} />
         Översikt
       </button>
 
-      <button onClick={onTogglePresenter} aria-pressed={presenterMode} aria-label="Visa manusläge">
+      <button onClick={onToggleEdit} aria-pressed={editMode} aria-label="Redigera presentation">
+        <Pencil size={18} />
+        Redigera
+      </button>
+
+      <button onClick={onTogglePresenter} aria-pressed={presenterMode} disabled={editMode} aria-label="Visa manusläge">
         <PanelRightOpen size={18} />
         Manus
       </button>
@@ -49,11 +56,6 @@ export function Controls({
       <button onClick={onOpenPresentation} aria-label="Öppna presentationsvy utan manus">
         <Presentation size={18} />
         Presentationsvy
-      </button>
-
-      <button onClick={onOpenAudience} aria-label="Öppna åskådarvy utan manus">
-        <Users size={18} />
-        Åskådarvy
       </button>
 
       <span className="controls__counter">{current + 1} / {total}</span>
